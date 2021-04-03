@@ -1,67 +1,66 @@
 /*
-Date: 3/21/21
+Date: 3/26/21
 Author: Wayne Kwiat
 Description:
-Write a program that simulates a soft drink machine. Each time the program runs, it should enter a loop that performs the following steps:
-A list of drinks is displayed on the screen. The user should be allowed to either quit the program or pick a drink.
-If the user selects a drink, he or she will next enter the amount of money that is to be inserted into the drink machine.
-The program should display the amount of change that would be returned and subtract one from the number of that drink left in the machine.
-If the user selects a drink that has sold out, a message should be displayed.
-The loop then repeats.
-When the user chooses to quit the program it should display the total amount of money the machine earned.
+In this programming challenge you will create a simple trivia game for two players. The program will work like this:
+Starting with player 1, each player gets a turn at answering five trivia questions. (There are a total of 10 questions.)
+When a question is displayed, four possible answers are also displayed.
+Only one of the answers is correct, and if the player selects the correct answer he or she earns a point.
+After answers have been selected for all of the questions, the program displays the number of points earned by each player
+and declares the player with the highest number of points the winner.
 */
 
 #include <iostream>
-#include <string>
-#include <iomanip>
+#include "Question.h"
 using namespace std;
-
-struct Drink
-{
-    string drinkName;   //Drink name
-    int itemQuantity;   //Drink quantity
-    float itemCost;     //Drink cost
-};
-
 
 int main()
 {
-    bool machine_on = true;
-    int choice;
-    float payment;
-    float total = 0;
-    float change;
-    const int NUM_DRINKS = 5;
-    Drink drinkMachine[NUM_DRINKS] =
-    {
-        {"Cola", 20, .75},
-        {"Root Beer", 20, .75},
-        {"Lemon-Lime", 20, .75},
-        {"Grape Soda", 20, .80},
-        {"Cream Soda", 20, .80}
+    int player1 = 0, player2 = 0;
+    const int NUM_QUESTIONS = 10;
+    Question quest_arr[NUM_QUESTIONS] = {
+        Question("What does BASH stand for?", "Born Again Shell", "Basic Shell", "Bourne Again Shell", "None of the above", 3),
+        Question("Which of the following is true of software version control?", "It is a naming convention for software releases.", "It is also known as source code managment.", "It is the smae as BitKeeper.", "None of the above are true.", 2),
+        Question("What does YAML stand for?", "Yet Another Markup Language", "Name of its creator", "None of the above", "YAML Ain't Markup Language", 4),
+        Question("How many bits are in a MAC address", "24 bits", "48 bits", "32 bits", "64 bits", 2),
+        Question("Which HTTP response code indicates that a resource has moved?", "301", "201", "501", "401", 1),
+        Question("What does SOAP stand for?", "Software Operations and Procedures", "Software Operations Authentication Protocol", "Simple Object Access Protocol", "Support Object Abstract Protocol", 3),
+        Question("Which of the following is not an HTTP method", "GET", "HEAD", "TRIGGER", "PATCH", 3),
+        Question("What command do you use to add the specific filename file.py to the Git index?", "git add .", "git index file.py", "git index add .", "git add file.py", 4),
+        Question("What are the three main structures tracked by Git?", "Index, head, and local repo", "Local workspace, index, and local repository", "Remote repository, head, and local index", "None of the above", 2),
+        Question("What of the following is a simple use case of a southbound API?", "Pushing network configuration changes down to devices", "Increasing security", "Streaming telemetry", "Sending information to the cloud", 1)
     };
 
-    while (machine_on) {
-        //display menu
-        cout << "Menu\n";
-        for (int i = 0; i < NUM_DRINKS; i++)
-            cout << i << "." << " " << drinkMachine[i].drinkName << " " << drinkMachine[i].itemCost << " " << drinkMachine[i].itemQuantity << endl;
-        cout << "5. Quit\nEnter your choice: ";
-        cin >> choice;
-        if (choice == 5) {
-            cout << "The machine's total for today was: " << total;
-            machine_on = false;
+    cout << "Welcome to the Quiz game!\n" << "Player 1 is up first with five questions!" << endl;
+
+    for (int i = 0; i < 5; i++)
+    {
+        if (quest_arr[i].ask_question() == true) {
+            cout << "Correct!" << endl;
+            player1++;
         }
-        else {
-            cout << "Please enter " << drinkMachine[choice].itemCost << endl;
-            cout << "How much money are you entering: ";
-            cin >> payment;
-            change = payment - drinkMachine[choice].itemCost;
-            total = total + drinkMachine[choice].itemCost;
-            drinkMachine[choice].itemQuantity--;
-            cout << "Your change is: " << change << endl;
-            cout << "Thank you for your selection!" << endl;
-        }
+        else
+            cout << "Incorrect!" << endl;
     }
+
+    cout << "***********   Player 2 is up!   *************" << endl;
+
+    for (int i = 5; i < NUM_QUESTIONS; i++)
+    {
+        if (quest_arr[i].ask_question() == true) {
+            cout << "Correct!" << endl;
+            player2++;
+        }
+        else
+            cout << "Incorrect!" << endl;
+    }
+
+    if (player1 > player2) {
+        cout << "**********   The Winner is Player 1!   *************";
+    }
+    else
+        cout << "**********   The Winner is Player 2!   **************";
+
     return 0;
 }
+
