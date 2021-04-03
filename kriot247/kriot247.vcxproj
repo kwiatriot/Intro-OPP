@@ -142,6 +142,8 @@
     <ClCompile Include="kriot247.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FuelGauge.h" />
+    <ClInclude Include="Odometer.h" />
     <ClInclude Include="Question.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
