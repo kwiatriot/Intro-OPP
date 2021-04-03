@@ -1,39 +1,67 @@
 /*
-Date: 3/14/21
+Date: 3/21/21
 Author: Wayne Kwiat
 Description:
-Write a program that displays a simulated paycheck. The program should ask the user to enter the date, the payee’s name, and the amount of the check (up to $10,000).
-It should then display a simulated check with the dollar amount spelled out. Be sure to format the numeric value of the check in fixed-point notation with two decimal places of precision.
-Be sure the decimal place always displays, even when the number is zero or has no fractional part. Use either C-strings or string class objects in this program.
-Input Validation: Do not accept negative dollar amounts, or amounts over $10,000.
+Write a program that simulates a soft drink machine. Each time the program runs, it should enter a loop that performs the following steps:
+A list of drinks is displayed on the screen. The user should be allowed to either quit the program or pick a drink.
+If the user selects a drink, he or she will next enter the amount of money that is to be inserted into the drink machine.
+The program should display the amount of change that would be returned and subtract one from the number of that drink left in the machine.
+If the user selects a drink that has sold out, a message should be displayed.
+The loop then repeats.
+When the user chooses to quit the program it should display the total amount of money the machine earned.
 */
 
 #include <iostream>
 #include <string>
+#include <iomanip>
 using namespace std;
+
+struct Drink
+{
+    string drinkName;   //Drink name
+    int itemQuantity;   //Drink quantity
+    float itemCost;     //Drink cost
+};
+
 
 int main()
 {
-	string name, date, amount;
-	string a1[] = { " ","One","Two","Three","Four","Five","Six","Seven","Eight","Nine" };
-	string a2[] = { " "," ","Twenty","Thirty","Fourty","Fifty","Sixty","Seventy","Eighty","Ninety" };
+    bool machine_on = true;
+    int choice;
+    float payment;
+    float total = 0;
+    float change;
+    const int NUM_DRINKS = 5;
+    Drink drinkMachine[NUM_DRINKS] =
+    {
+        {"Cola", 20, .75},
+        {"Root Beer", 20, .75},
+        {"Lemon-Lime", 20, .75},
+        {"Grape Soda", 20, .80},
+        {"Cream Soda", 20, .80}
+    };
 
-	cout << "Enter date in the format mm/dd/yyyy:";
-	cin >> date;
-	cin.ignore();
-	cout << "Enter payee name:";
-	getline(cin, name);
-
-	do {
-		cout << "Enter Amount in the format xxxx.xx:";
-		cin >> amount;
-	} while (amount.length() != 7 || amount[4] != '.');
-
-	cout << endl << "\t\t\t\t\t" << "Date: " << date << endl;
-	cout << "Pay to the order of: " << name << "\t\t" << "$" << amount << endl;
-	cout << a1[amount[0] - 48] << " Thousand " << a1[amount[1] - 48] << " Hundred " << a2[amount[2] - 48] << " " << a1[amount[3] - 48] << " and " << amount[5] << amount[6] << " Cents" << endl;
-
-	return 0;
-
+    while (machine_on) {
+        //display menu
+        cout << "Menu\n";
+        for (int i = 0; i < NUM_DRINKS; i++)
+            cout << i << "." << " " << drinkMachine[i].drinkName << " " << drinkMachine[i].itemCost << " " << drinkMachine[i].itemQuantity << endl;
+        cout << "5. Quit\nEnter your choice: ";
+        cin >> choice;
+        if (choice == 5) {
+            cout << "The machine's total for today was: " << total;
+            machine_on = false;
+        }
+        else {
+            cout << "Please enter " << drinkMachine[choice].itemCost << endl;
+            cout << "How much money are you entering: ";
+            cin >> payment;
+            change = payment - drinkMachine[choice].itemCost;
+            total = total + drinkMachine[choice].itemCost;
+            drinkMachine[choice].itemQuantity--;
+            cout << "Your change is: " << change << endl;
+            cout << "Thank you for your selection!" << endl;
+        }
+    }
+    return 0;
 }
-
