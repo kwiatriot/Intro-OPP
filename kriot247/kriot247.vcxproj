@@ -143,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicShape.h" />
+    <ClInclude Include="Circle.h" />
     <ClInclude Include="FuelGauge.h" />
     <ClInclude Include="Odometer.h" />
     <ClInclude Include="Question.h" />
