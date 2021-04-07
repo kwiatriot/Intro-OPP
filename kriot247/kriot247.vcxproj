@@ -142,6 +142,7 @@
     <ClCompile Include="kriot247.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BasicShape.h" />
     <ClInclude Include="FuelGauge.h" />
     <ClInclude Include="Odometer.h" />
     <ClInclude Include="Question.h" />

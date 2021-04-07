@@ -29,5 +29,8 @@
     <ClInclude Include="Odometer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BasicShape.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
