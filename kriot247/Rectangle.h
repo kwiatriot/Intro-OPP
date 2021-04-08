@@ -1,5 +1,7 @@
-#pragma once
+#ifndef RECTANGLE
+#define RECTANGLE
 #include "BasicShape.h"
+
 class Rectangle :
     public BasicShape
 {
@@ -9,7 +11,7 @@ private:
     long length;
 public:
     // Constructor
-    Rectangle(long w, long l) 
+    Rectangle(long w, long l)
     {
         width = w;
         length = l;
@@ -19,4 +21,8 @@ public:
     long getLength() { return length; }
     void calcArea() { area = length * width; }
 };
+
+#endif // !RECTANGLE
+
+
 

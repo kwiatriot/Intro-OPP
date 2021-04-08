@@ -1,3 +1,5 @@
+#ifndef CIRCLE
+#define CIRCLE
 
 #include "BasicShape.h"
 class Circle :
@@ -21,4 +23,8 @@ public:
     long getCenterY() { return centerY; }
     void calcArea() { area = 3.14159 * radius * radius; }
 };
+#endif // !CIRCLE
+
+
+
 

@@ -2,7 +2,9 @@
 Date: 4/8/21
 Author: Wayne Kwiat
 Description:
-
+Create a pure abstract class and two derived classes. 
+After you have created these classes, create a driver program that defines a Circle object and a Rectangle object. 
+Demonstrate that each object properly calculates and reports its area.
 */
 
 
@@ -14,29 +16,14 @@ using namespace std;
 
 int main()
 {
-    bool driving = true;
-    Odometer car1_OD;
-    FuelGauge car1_FG;
+    Circle cir1(0, 0, 4);
+    Rectangle rec1(8, 12);
 
-    for (int i = 0; i < 15; i++) {
-        car1_FG.addFuel();
-    }
+    cir1.calcArea();
+    rec1.calcArea();
 
-    cout << "******    The car is full of gas, let's get driving!    ******" << endl;
-
-    while (car1_FG.getFuel() > 0)
-    {
-        if (car1_OD.getMileage() % 24 == 0) {
-            cout << "Current Fuel Level: " << car1_FG.getFuel() << endl;
-            cout << "Current Mileage is: " << car1_OD.getMileage() << endl;
-            car1_OD.addMileage();
-            car1_FG.subFuel();
-        }
-        else
-            car1_OD.addMileage();
-    }
-
-    cout << "You have run out of gas!" << endl;
+    cout << "The circle's area is: " << cir1.getArea() << endl;
+    cout << "The rectangle's area is: " << rec1.getArea() << endl;
 
     return 0;
 

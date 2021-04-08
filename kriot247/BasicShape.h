@@ -13,7 +13,7 @@ public:
 		return area;
 	}
 
-	virtual void calcArea() const = 0;
+	virtual void calcArea() = 0;
 };
 
 #endif // !BASICSHAPE
