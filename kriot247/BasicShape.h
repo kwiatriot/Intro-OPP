@@ -4,7 +4,7 @@ using namespace std;
 
 class BasicShape 
 {
-private:
+protected:
 	double area;
 
 public:
@@ -13,7 +13,7 @@ public:
 		return area;
 	}
 
-	virtual double calcArea() const = 0;
+	virtual void calcArea() const = 0;
 };
 
 #endif // !BASICSHAPE
