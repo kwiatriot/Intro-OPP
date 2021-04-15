@@ -44,15 +44,15 @@ public:
 
 int main()
 {
-    int a[5] = { 3, 6, 2, 9, 1 };
-    double b[5] = { 3.6, 2.8, 7.1, 8.4, 9.7 };
+    int a[5] = { 3, 6, -2, 9, 1 };
+    double b[5] = { 3.6, 2.8, 7.1, 8.4, 120 };
     try {
     TestScores <int>o1(a);
     cout << "This is the average of the integer array: " << o1.avg() << endl;
     }
     catch (TestScores<int>::exp)
     {
-        cout << "One or more numbers is below 0 or greater then 100" << endl;
+        cout << "One or more numbers, in the integer array, is below 0 or greater then 100" << endl;
     }
     try {
         TestScores <double>o2(b);
@@ -60,7 +60,7 @@ int main()
     }
     catch (TestScores<double>::exp)
     {
-        cout << "One or more numbers is below 0 or greater then 100" << endl;
+        cout << "One or more numbers, in the double array, is below 0 or greater then 100" << endl;
     }
     return 0;
 }
