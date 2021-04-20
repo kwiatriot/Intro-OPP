@@ -10,57 +10,70 @@ Demonstrate the class in a program.
 
 
 #include <iostream>
+#include <string>
 
 using namespace std;
 
-template <class T>
-class TestScores 
+class MenuItem
+{
+protected:
+    string name;
+    float cost;
+public:
+    MenuItem() 
+    {
+        name = "";
+        cost = 0.0;
+    }
+
+    MenuItem(string n, float c) 
+    {
+        n = name;
+        c = cost;
+    }
+
+    virtual float getCost() = 0;
+};
+
+
+class Soda: public MenuItem 
 {
 private:
-    T arr[5];
-
+    string soda_name;
+    float soda_cost;
 public:
-    class exp{};
-    // Constructor
-    TestScores(T y[]) 
+    Soda(string n, float c) 
     {
-        for (int i = 0; i < 5; i++) 
-        {
-            if (y[i] < 0 || y[i] > 100)
-                throw exp{};
-            else
-                arr[i] = y[i];
-        }
+        n = soda_name;
+        c = soda_cost;
+        getCost();
     }
-    T avg()
+
+    float getCost() 
     {
-        T total = 0;
-        for (int i = 0; i < 5; i++)
-            total = total + arr[i];
-        return total / 5.0;
+        return soda_cost;
     }
 
 };
 
+class Coffee: public MenuItem 
+{
+private:
+    string coffee_name;
+    float coffee_cost;
+public:
+    Coffee(string n, float c) 
+    {
+        n = coffee_name;
+        c = coffee_cost;
+        getCost();
+    }
+
+};
+
+
 int main()
 {
-    int a[5] = { 3, 6, -2, 9, 1 };
-    double b[5] = { 3.6, 2.8, 7.1, 8.4, 120 };
-    try {
-    TestScores <int>o1(a);
-    cout << "This is the average of the integer array: " << o1.avg() << endl;
-    }
-    catch (TestScores<int>::exp)
-    {
-        cout << "One or more numbers, in the integer array, is below 0 or greater then 100" << endl;
-    }
-    try {
-        TestScores <double>o2(b);
-        cout << "This is the average of the double array: " << o2.avg() << endl;
-    }
-    catch (TestScores<double>::exp)
-    {
-        cout << "One or more numbers, in the double array, is below 0 or greater then 100" << endl;
-    }
+ 
     return 0;
 }
